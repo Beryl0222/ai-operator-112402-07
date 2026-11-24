@@ -1,0 +1,194 @@
+{
+  "shape": [
+    1,
+    48,
+    64,
+    80
+  ],
+  "groupChannels": 8,
+  "outputs": 48,
+  "workspace": 98304,
+  "eps": 1e-05,
+  "gamma": [
+    -1.25,
+    0,
+    0.125,
+    3.0,
+    -0.5,
+    0.75,
+    1,
+    0.25
+  ],
+  "variance": [
+    0.004,
+    1,
+    0.5,
+    0.002,
+    4,
+    1,
+    0.99999,
+    2
+  ],
+  "mean": [
+    0.25,
+    -1,
+    0.5,
+    -0.25
+  ],
+  "beta": [
+    -2,
+    0,
+    6,
+    5.99998
+  ],
+  "devices": [
+    {
+      "id": "S1",
+      "bits": 24,
+      "fixed": [
+        [
+          1,
+          -7
+        ],
+        [
+          1,
+          -6
+        ],
+        [
+          3,
+          -8
+        ],
+        [
+          1,
+          -7
+        ]
+      ],
+      "activation": "stepped",
+      "ties": "above"
+    },
+    {
+      "id": "S2",
+      "bits": 32,
+      "fixed": [
+        [
+          1,
+          -8
+        ],
+        [
+          1,
+          -7
+        ],
+        [
+          1,
+          -6
+        ],
+        [
+          3,
+          -8
+        ]
+      ],
+      "activation": "relu6",
+      "ties": "even"
+    }
+  ],
+  "exports": [
+    [
+      "v1",
+      [
+        "acc",
+        "pre",
+        "out"
+      ],
+      [
+        1,
+        3,
+        7
+      ]
+    ],
+    [
+      "v2",
+      [
+        "acc",
+        "pre",
+        "out"
+      ],
+      [
+        3,
+        1,
+        7
+      ]
+    ]
+  ],
+  "requests": [
+    [
+      "export",
+      "v1",
+      "S1"
+    ],
+    [
+      "tap",
+      "pre",
+      3
+    ],
+    [
+      "run",
+      "out",
+      [
+        0,
+        4
+      ]
+    ],
+    [
+      "export",
+      "v2",
+      "S2"
+    ],
+    [
+      "tap",
+      "pre",
+      1
+    ],
+    [
+      "read",
+      "v1",
+      "pre",
+      3
+    ]
+  ],
+  "wire": {
+    "encoding": "nchw-u8",
+    "weight": "signed-int8",
+    "activationZero": 113,
+    "inputScale": [
+      1,
+      -6
+    ],
+    "stepped": [
+      [
+        0,
+        0
+      ],
+      [
+        1.5,
+        32
+      ],
+      [
+        3,
+        64
+      ],
+      [
+        6,
+        127
+      ]
+    ],
+    "outScale": [
+      1,
+      -5
+    ],
+    "outZero": -63,
+    "preTolerance": 5e-05,
+    "postCodeTolerance": 1,
+    "maxProbeRows": 12
+  },
+  "widePerGroup": 2
+}
